@@ -11,5 +11,3 @@ while (x!=number):
         number = int(input("try again "))
     tries = tries + 1
 print(tries, " attempts")
-
-print(x)
