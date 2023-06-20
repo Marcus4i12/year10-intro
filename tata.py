@@ -9,9 +9,9 @@ print()
 option = str(input("Choose an option: a,b,c: "))
 
 try:
-    file = open(r"c:\Users\training.user\Downloads\record.txt", "r")
+    file = open(r"c:\Users\training.user\Downloads\record.txt", "r") #opens file to use
 except FileNotFoundError:
-    file = open(r"c:\Users\training.user\Downloads\record.txt", "x")
+    file = open(r"c:\Users\training.user\Downloads\record.txt", "x") #opens anywaya
 
 if option.lower() == "a":
     opt1 = str(input("Enter your name: "))
