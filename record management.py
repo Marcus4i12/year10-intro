@@ -30,7 +30,7 @@ class records:
 
 while True:
     def createfile():
-        with open(r"c:\Users\training.user\Downloads\record.txt", "w+") as create:
+        with open(r"c:\Users\training.user\Downloads\record.txt", "w+") as create:          #create headline at top when file made
             create.write("|\tName:\t\tFavourite Sport:\t\tFavourite Colour:\n")
     if Path(r"c:\Users\training.user\Downloads\record.txt"):
         if os.stat(r"c:\Users\training.user\Downloads\record.txt").st_size != 0:
@@ -53,4 +53,4 @@ while True:
     print()
 
     option = input("Choose an option: a,b,c: ").upper()
-    records(option)
+    records(option)         #loop code
