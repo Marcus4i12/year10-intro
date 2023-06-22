@@ -30,8 +30,9 @@ class Records:
         with open(self.file, "r+") as f:
             f.truncate(46)
 
+
 def record_manager():
-    file_path = Path(r"c:\Users\training.user\Downloads\record.txt")
+    file_path = os.path.join("record.txt")
     records = Records(file_path)
 
     while True:
@@ -50,11 +51,11 @@ def record_manager():
         print()
 
         def createfile():
-            with open(r"c:\Users\training.user\Downloads\record.txt", "w+") as create:          #create headline at top when file made
+            with open(file_path, "w+") as create:          #create headline at top when file made
                 create.write("|\tName:\t\tFavourite Sport:\t\tFavourite Colour:\n")
-        if Path(r"c:\Users\training.user\Downloads\record.txt"):
-            if os.stat(r"c:\Users\training.user\Downloads\record.txt").st_size != 0:
-                with open(r"c:\Users\training.user\Downloads\record.txt", "r+") as readfirstline:
+        if Path(file_path):
+            if os.stat(file_path).st_size != 0:
+                with open(file_path, "r+") as readfirstline:
                     first = readfirstline.readlines()[0][0]
                     if first != "|":
                         readfirstline.write("|\t\t\tName:\t\tFavourite Sport:\t\tFavourite Colour:\n")
