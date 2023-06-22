@@ -28,7 +28,7 @@ class Records:
 
     def delete_all_records(self):               # option = D
         with open(self.file, "r+") as f:
-            f.truncate(0)
+            f.truncate(46)
 
 def record_manager():
     file_path = Path(r"c:\Users\training.user\Downloads\record.txt")
