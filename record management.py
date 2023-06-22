@@ -1,69 +1,82 @@
 import os
 from pathlib import Path
 
-class records:
-    def __init__(self, option):
-        self.option = option
+class Records:
+    def __init__(self, file):
+        self.file = file
 
-        try:
-            file = open(r"c:\Users\training.user\Downloads\record.txt", "r") #opens file to use
-        except FileNotFoundError:
-            file = open(r"c:\Users\training.user\Downloads\record.txt", "x") #opens anyway
+    def add_record(self, opt1, opt2, opt3):                 # option = B
+        with open(self.file, "a") as writerecord:
+            writerecord.write(f"|\t{opt1}\t\t{opt2}\t\t\t{opt3}\n")
 
-        if option.lower() == "a":
-                opt1 = str(input("Enter your name: "))
-                opt2 = str(input("Whats your favourite sport? "))
-                opt3 = str(input("What is your favourite colour? "))
-                with open(r"c:\Users\training.user\Downloads\record.txt", "a") as writerecord:
-                    writerecord.write(f"|\t{opt1}\t\t{opt2}\t\t\t{opt3}\n")            #add data to record
+    def show_records(self):                     # option = B
+        with open(self.file, "r") as f:
+            print(f.read())
 
-        elif option.lower() == "b":
-            file = open(r"c:\Users\training.user\Downloads\record.txt", "r")        #shows inside
-            print(file.read())
-            file.close()
+    def remove_line(self, line_number):         # option = C
+        with open(self.file, "r") as f:
+            lines = f.readlines()
+        with open(self.file, "w") as f:
+            for i in range(len(lines)):
+                if i != line_number:
+                    f.write(lines[i])
 
-        elif option.lower() == "c":
-            def delete_line(file_name, line_number):
-                with open(file_name, "r") as f:
-                    lines = f.readlines()
-                with open(file_name, "w") as f:
-                    for i in range(len(lines)):
-                        if i != line_number:
-                            f.write(lines[i])
-            if __name__ == "__main__":
-                file_name = r"c:\Users\training.user\Downloads\record.txt"
-                line_number = int(input("Enter the line number to delete: "))
-                delete_line(file_name, line_number)
+    def delete_all_records(self):               # option = D
+        with open(self.file, "r+") as f:
+            f.truncate(0)
 
-        elif option.lower() == "d":
-            print("Deleted content")
-            file = open(r"c:\Users\training.user\Downloads\record.txt", "r+")
-            file.truncate(0)        #removes data at stated value
+def record_manager():
+    file_path = Path(r"c:\Users\training.user\Downloads\record.txt")
+    records = Records(file_path)
 
-while True:
-    def createfile():
-        with open(r"c:\Users\training.user\Downloads\record.txt", "w+") as create:          #create headline at top when file made
-            create.write("|\tName:\t\tFavourite Sport:\t\tFavourite Colour:\n")
-    if Path(r"c:\Users\training.user\Downloads\record.txt"):
-        if os.stat(r"c:\Users\training.user\Downloads\record.txt").st_size != 0:
-            with open(r"c:\Users\training.user\Downloads\record.txt", "r+") as readfirstline:
-                first = readfirstline.readlines()[0][0]
-                if first != "|":
-                    readfirstline.write("|\t\t\tName:\t\tFavourite Sport:\t\tFavourite Colour:\n")
+    while True:
+        print()
+        print("-Record management system-")
+        print()
+        print("Select an option:")
+        print("A | Add record")
+        print("B | Show record")
+        print("C | Remove a record")
+        print("D | Delete all records")
+        print()
+
+        option = input("Choose an option: A | B | C | D : ").upper()
+
+        print()
+
+        def createfile():
+            with open(r"c:\Users\training.user\Downloads\record.txt", "w+") as create:          #create headline at top when file made
+                create.write("|\tName:\t\tFavourite Sport:\t\tFavourite Colour:\n")
+        if Path(r"c:\Users\training.user\Downloads\record.txt"):
+            if os.stat(r"c:\Users\training.user\Downloads\record.txt").st_size != 0:
+                with open(r"c:\Users\training.user\Downloads\record.txt", "r+") as readfirstline:
+                    first = readfirstline.readlines()[0][0]
+                    if first != "|":
+                        readfirstline.write("|\t\t\tName:\t\tFavourite Sport:\t\tFavourite Colour:\n")
+            else:
+                createfile()
         else:
             createfile()
-    else:
-        createfile()
+        if option.upper() == "A":
+            name = input("Enter your name: ")
+            sport = input("What's your favourite sport? ")
+            color = input("What is your favourite colour? ")
+            records.add_record(name, sport, color)
 
-    print()
-    print("Record management system")
-    print()
-    print("Pick an option:")
-    print("a: add record")
-    print("b: show record")
-    print("c: remove a record")
-    print("d: delete all records")
-    print()
+        elif option.upper() == "B":
+            records.show_records()
 
-    option = input("Choose an option: a,b,c,d: ").upper()
-    records(option)         #loop code
+        elif option.upper() == "C":
+            line_number = int(input("Enter the line number to delete: "))
+            records.remove_line(line_number)
+            print("Removed record")
+
+        elif option.upper() == "D":
+            print("Deleted all records")
+            records.delete_all_records()
+        
+        else:
+            print("Invalid input")
+
+if __name__ == "__main__":                  # Loop code
+    record_manager()
