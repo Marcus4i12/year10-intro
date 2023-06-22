@@ -1,6 +1,11 @@
 import os
 from pathlib import Path
 
+class colour:
+    RED = '\033[31m'
+    RESET = '\033[0m'
+    BOLD = '\033[1m'
+
 class Records:
     def __init__(self, file):
         self.file = file
@@ -31,7 +36,7 @@ def record_manager():
 
     while True:
         print()
-        print("-Record management system-")
+        print(f"{colour.BOLD}-Record management system-{colour.RESET}")
         print()
         print("Select an option:")
         print("A | Add record")
@@ -69,14 +74,14 @@ def record_manager():
         elif option.upper() == "C":
             line_number = int(input("Enter the line number to delete: "))
             records.remove_line(line_number)
-            print("Removed record")
+            print(f"{colour.RED}Removed record{colour.RESET}")
 
         elif option.upper() == "D":
-            print("Deleted all records")
+            print(f"{colour.RED}Deleted all records{colour.RESET}")
             records.delete_all_records()
         
         else:
-            print("Invalid input")
+            print(f"{colour.RED}Invalid input{colour.RESET}")
 
 if __name__ == "__main__":                  # Loop code
     record_manager()
