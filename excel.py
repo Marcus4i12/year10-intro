@@ -1,48 +1,21 @@
-import csv
-import os
-import sys
-from pathlib import Path
+import openpyxl
 
+workbook = openpyxl.Workbook()
+worksheet = workbook.active
 
-class records:
-    def __init__(self, option):
-        self.option = option
+worksheet.cell(row=1, column=1).value = "Name:"
+worksheet.cell(row=1, column=2).value = "Age:"
+worksheet.cell(row=1, column=3).value = "Networth:"
 
-        try:
-            file = open(r"c:\Users\training.user\Downloads\flash.csv", "r") #opens file to use
-        except FileNotFoundError:
-            file = open(r"c:\Users\training.user\Downloads\flash.csv", "x") #opens anyway
-
-        if option.lower() == "a":
-            opt1 = str(input("Enter your name: "))
-            opt2 = str(input("Whats your favourite sport? "))
-            opt3 = str(input("What is your favourite colour? "))
-            with open(r"c:\Users\training.user\Downloads\flash.csv", "a") as writerecord:
-                writerecord.write(f"|\t{opt1}\t\t{opt2}\t\t\t{opt3}\n")            #add data to record
-
-        elif option.lower() == "b":
-            file = open(r"c:\Users\training.user\Downloads\flash.csv", "r")        #shows inside
-            print(file.read())
-            file.close()
-
-        elif option.lower() == "c":
-            print("Deleted content")
-            file = open(r"c:\Users\training.user\Downloads\flash.csv", "r+")
-            file.truncate(0)        #removes data at stated value
-
-        csv_rowlist = [["#", "Name:", "Favourite Sport", "Favourite Colour" ], [1, opt1, opt2, opt3]]   #creates heading and data
-        with open(r'c:\Users\training.user\Downloads\flash.csv', 'w') as file:
-            writer = csv.writer(file)
-            writer.writerows(csv_rowlist)
 while True:
-    print()
-    print("Record management system")
-    print()
-    print("Pick an option:")
-    print("a: add record")
-    print("b: show record")
-    print("c: delete record")
-    print()
+    name = input("What's your name? (type 'end' to stop) ")
+    if name == "end":
+        break
+    age = input("What's your age? ")
+    networth = input("What's your net worth? ")
+    row = worksheet.max_row + 1
+    worksheet.cell(row=row, column=1).value = name
+    worksheet.cell(row=row, column=2).value = age
+    worksheet.cell(row=row, column=3).value = networth
 
-    option = input("Choose an option: a,b,c: ").upper()
-    records(option)         #loop code
+workbook.save(r"c:\Users\training.user\Downloads\flash.csv")

@@ -39,7 +39,6 @@ class Records:
         with open(self.file, "r+") as f:
             f.truncate(46)
 
-
 def record_manager():
     """"holds commands of options and print statements"""
 
@@ -89,7 +88,7 @@ def record_manager():
             color = input("What is your favourite colour? ")
             records.add_record(name, sport, color)
 
-        elif option == "B":
+        elif option.upper() == "B":
             print(f"{colour.RED}Showing records{colour.RESET}\n")
             records.show_records()
 
