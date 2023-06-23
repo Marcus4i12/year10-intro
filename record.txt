@@ -1,3 +1,0 @@
-|	Name:		Favourite Sport:		Favourite Colour:
-|	marcus		football			blue
-|	eric		basketball			green
