@@ -83,22 +83,22 @@ def record_manager():
         else:
             create_file()
 
-        if option.upper() == "A":
+        if option == "A":
             name = input("What is your name?  ")
             sport = input("What is your favourite sport? ")
             color = input("What is your favourite colour? ")
             records.add_record(name, sport, color)
 
-        elif option.upper() == "B":
+        elif option == "B":
             print(f"{colour.RED}Showing records{colour.RESET}\n")
             records.show_records()
 
-        elif option.upper() == "C":
+        elif option == "C":
             line_number = int(input("Enter the line number to delete: "))
             records.remove_line(line_number)
             print(f"\n{colour.RED}Removed record{colour.RESET}")
 
-        elif option.upper() == "D":
+        elif option == "D":
             print(f"{colour.RED}Deleted all records{colour.RESET}")
             records.delete_all_records()
 
